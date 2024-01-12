@@ -10,7 +10,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_23opd"]
 radius = 19.0
-height = 74.0
+height = 57.8947
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i8nou"]
 radius = 23.0
@@ -32,6 +32,8 @@ process_callback = 0
 position_smoothing_enabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(3, 17)
+scale = Vector2(1, 0.76)
 shape = SubResource("CapsuleShape2D_23opd")
 
 [node name="Gun" type="Node2D" parent="Player"]

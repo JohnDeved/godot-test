@@ -36,10 +36,7 @@ func _physics_process(delta):
 
 # Function to calculate the direction based on user input and joystick input
 func get_direction():
-	var direction = Vector2(
-		Input.get_action_strength("action_right") - Input.get_action_strength("action_left"),
-		Input.get_action_strength("action_down") - Input.get_action_strength("action_up")
-	)
+	var direction = Input.get_vector("action_left", "action_right", "action_up", "action_down")
 
 	var joy_input = Vector2(
 		Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_X),
