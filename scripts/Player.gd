@@ -5,8 +5,7 @@ extends CharacterBody2D
 @export var FRICTION = 0.2
 @export var SPEED_ZOOM_FACTOR = 0.15
 
-@onready var camera: Camera2D = get_node("PlayerCamera")
-
+@onready var camera: Camera2D = $PlayerCamera
 
 # The _physics_process function is called every physics frame
 func _physics_process(delta):

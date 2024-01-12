@@ -13,8 +13,8 @@ func spawn_bullet():
 	add_child(bullet)
 
 	#ugly
-	var sprite: Sprite2D = get_node("GunSprite")
-	var muzzle: Marker2D = sprite.get_node("Muzzle")
+	var sprite: Sprite2D = $GunSprite
+	var muzzle: Marker2D = $Muzzle
 	var pos = muzzle.global_position
 	var rot = sprite.rotation + randf_range(-0.1, 0.1) # spread
 	bullet.fire(pos, rot)

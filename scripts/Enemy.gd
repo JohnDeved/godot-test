@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var SPEED = 100
 
-@onready var player = get_node("%Player")
+@onready var player: CharacterBody2D = %Player
 
 func _physics_process(_delta):
 	var direction = global_position.direction_to(player.global_position)
