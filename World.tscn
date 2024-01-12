@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://mkvcsslcsnvh"]
+
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_dnahp"]
+[ext_resource type="Texture2D" uid="uid://c3x1mt8d5taxm" path="res://sprites/cat.svg" id="2_kfsmt"]
+[ext_resource type="Script" path="res://scripts/Gun.gd" id="3_rsrdw"]
+[ext_resource type="Texture2D" uid="uid://ct4kjbmqeybk4" path="res://sprites/gun.svg" id="4_7sx6n"]
+[ext_resource type="Script" path="res://scripts/GunSprite.gd" id="5_4p3ej"]
+[ext_resource type="Script" path="res://scripts/Enemy.gd" id="7_ap3bq"]
+[ext_resource type="Texture2D" uid="uid://v4na7afresf0" path="res://sprites/crab.svg" id="8_qgbif"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_23opd"]
+radius = 19.0
+height = 74.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i8nou"]
+radius = 23.0
+
+[node name="World" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+unique_name_in_owner = true
+position = Vector2(599, 106)
+script = ExtResource("1_dnahp")
+
+[node name="PlayerSprite" type="Sprite2D" parent="Player"]
+position = Vector2(0, -1)
+scale = Vector2(0.160156, 0.160156)
+texture = ExtResource("2_kfsmt")
+
+[node name="PlayerCamera" type="Camera2D" parent="Player"]
+process_callback = 0
+position_smoothing_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("CapsuleShape2D_23opd")
+
+[node name="Gun" type="Node2D" parent="Player"]
+script = ExtResource("3_rsrdw")
+
+[node name="GunSprite" type="Sprite2D" parent="Player/Gun"]
+scale = Vector2(0.143555, 0.143555)
+texture = ExtResource("4_7sx6n")
+centered = false
+offset = Vector2(60, -260)
+script = ExtResource("5_4p3ej")
+
+[node name="Muzzle" type="Marker2D" parent="Player/Gun/GunSprite"]
+position = Vector2(571.21, -83.5917)
+
+[node name="Line2D" type="Line2D" parent="Player/Gun/GunSprite/Muzzle"]
+points = PackedVector2Array(97.5234, 0, -6.96582, 0)
+
+[node name="Enemy" type="CharacterBody2D" parent="." groups=["enemies"]]
+position = Vector2(257, 142)
+script = ExtResource("7_ap3bq")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+scale = Vector2(0.148437, 0.148437)
+texture = ExtResource("8_qgbif")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(0, 6)
+shape = SubResource("CircleShape2D_i8nou")
