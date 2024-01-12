@@ -8,7 +8,7 @@ extends Node2D
 @export var steering_force := .5  # The force with which the bullet steers towards the enemy
 @export var min_speed := 100
 
-@onready var tracer: Line2D = get_node("Tracer")
+@onready var tracer: Line2D = $Tracer
 
 
 func _process(delta: float):

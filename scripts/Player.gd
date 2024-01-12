@@ -52,9 +52,7 @@ func get_direction():
 	return direction
 
 
-# Function to calculate the zoom level based on the speed
-
-
+# Function to calculate the zoom level based on the speeds
 func get_zoom_level():
 	var speed = velocity.length()
 	var zoom_level = 1 - SPEED_ZOOM_FACTOR + SPEED_ZOOM_FACTOR * (1 - speed / (SPEED + 50))
