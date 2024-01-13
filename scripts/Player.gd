@@ -1,25 +1,25 @@
 extends CharacterBody2D
 
-@export var SPEED = 600
-@export var ACCELERATION = 0.1
-@export var FRICTION = 0.2
-@export var SPEED_ZOOM_FACTOR = 0.15
+@export var SPEED := 600
+@export var ACCELERATION := 0.1
+@export var FRICTION := 0.2
+@export var SPEED_ZOOM_FACTOR := 0.15
 
 @onready var camera: Camera2D = $PlayerCamera
 
 # The _physics_process function is called every physics frame
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	# Calculate the direction based on user input and joystick input
-	var direction = get_direction()
+	var direction := get_direction()
 
 	# By default, the speed scale is 1.0
-	var speed_scale = 1.0
+	var speed_scale := 1.0
 	# If the joystick is being used, adjust the speed scale
 	if direction.length() > 0:
 		speed_scale = direction.length()
 
 	# Calculate the target velocity based on the direction and speed scale
-	var target_velocity = direction * SPEED * speed_scale
+	var target_velocity: Vector2 = direction * SPEED * speed_scale
 	# Gradually adjust the velocity towards the target velocity
 	velocity = velocity.lerp(target_velocity, ACCELERATION)
 
@@ -35,10 +35,10 @@ func _physics_process(delta):
 
 
 # Function to calculate the direction based on user input and joystick input
-func get_direction():
-	var direction = Input.get_vector("action_left", "action_right", "action_up", "action_down")
+func get_direction() -> Vector2:
+	var direction := Input.get_vector("action_left", "action_right", "action_up", "action_down")
 
-	var joy_input = Vector2(
+	var joy_input := Vector2(
 		Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_X),
 		Input.get_joy_axis(0, JoyAxis.JOY_AXIS_LEFT_Y)
 	)
@@ -53,7 +53,7 @@ func get_direction():
 
 
 # Function to calculate the zoom level based on the speeds
-func get_zoom_level():
-	var speed = velocity.length()
-	var zoom_level = 1 - SPEED_ZOOM_FACTOR + SPEED_ZOOM_FACTOR * (1 - speed / (SPEED + 50))
+func get_zoom_level() -> Vector2:
+	var speed := velocity.length()
+	var zoom_level := 1 - SPEED_ZOOM_FACTOR + SPEED_ZOOM_FACTOR * (1 - speed / (SPEED + 50))
 	return Vector2(zoom_level, zoom_level)

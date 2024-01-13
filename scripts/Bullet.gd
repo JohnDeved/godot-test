@@ -1,3 +1,4 @@
+class_name Bullet
 extends Node2D
 
 @export var is_fired := false
@@ -11,15 +12,15 @@ extends Node2D
 @onready var tracer: Line2D = $Tracer
 
 
-func _process(delta: float):
+func _process(delta: float) -> void:
 	if is_fired:
 		position += direction * speed * delta
-		var closest_enemy = get_closest_enemy()
+		var closest_enemy := get_closest_enemy()
 		if closest_enemy:
-			var desired_direction = (closest_enemy.global_position - global_position).normalized()
+			var desired_direction := (closest_enemy.global_position - global_position).normalized()
 			direction = direction.lerp(desired_direction, steering_force * delta)
 
-		var current_speed = (direction * speed).length()
+		var current_speed := (direction * speed).length()
 		tracer.modulate = Color(1, 1, 1, 1-min_speed / current_speed)
 
 
@@ -27,26 +28,26 @@ func _process(delta: float):
 			queue_free()
 
 
-func fire(_pos: Vector2, _dir: float):
+func fire(_pos: Vector2, _dir: float) -> void:
 	position = _pos
 	origin = _pos
 	direction = Vector2.RIGHT.rotated(_dir)
 	is_fired = true
 
 
-func should_despawn():
+func should_despawn() -> bool:
 	# distance from origin
 	return position.distance_to(origin) > 10000 or (direction * speed).length() < min_speed
 
 
-func get_closest_enemy():
-	var closest_enemy = null
-	var closest_distance = INF
+func get_closest_enemy() -> CharacterBody2D:
+	var closest_enemy: CharacterBody2D = null
+	var closest_distance := INF
 
-	for enemy in get_tree().get_nodes_in_group("enemies"):
-		var distance = global_position.distance_to(enemy.global_position)
+	for enemy: CharacterBody2D in get_tree().get_nodes_in_group("enemies"):
+		var distance := global_position.distance_to(enemy.global_position)
 		if distance < closest_distance:
 			closest_distance = distance
 			closest_enemy = enemy
-
+	
 	return closest_enemy
