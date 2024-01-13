@@ -1,10 +1,10 @@
 extends Node2D
 
 @onready var BulletScn := preload("res://Bullet.tscn")
-var enemyCheck := preload("helper/EnemyCheck.gd").new(self)
+var enemy_check := preload("helper/EnemyCheck.gd").new(self)
 
 func _process(_delta: float) -> void:
-	var closest_enemy := enemyCheck.get_closest_enemy()
+	var closest_enemy := enemy_check.get_closest_enemy()
 	if closest_enemy != null:
 		rotate_towards_enemy(closest_enemy)
 	
