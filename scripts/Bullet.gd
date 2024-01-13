@@ -10,12 +10,12 @@ extends Node2D
 @export var min_speed := 100
 
 @onready var tracer: Line2D = $Tracer
-var enemyCheck := preload("helper/EnemyCheck.gd").new()
+var enemyCheck := preload("helper/EnemyCheck.gd").new(self)
 
 func _physics_process(delta: float) -> void:
 	if is_fired:
 		position += direction * speed * delta
-		var closest_enemy := enemyCheck.get_closest_enemy(self)
+		var closest_enemy := enemyCheck.get_closest_enemy()
 		if closest_enemy:
 			var desired_direction := (closest_enemy.global_position - global_position).normalized()
 			direction = direction.lerp(desired_direction, steering_force * delta)
