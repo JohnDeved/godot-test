@@ -12,13 +12,6 @@ point_count = 2
 [node name="Bullet" type="Node2D"]
 top_level = true
 script = ExtResource("1_ap1dt")
-is_fired = null
-direction = null
-speed = null
-damage = null
-origin = null
-steering_force = null
-min_speed = null
 
 [node name="ShapeCast2D" type="ShapeCast2D" parent="."]
 shape = SubResource("CircleShape2D_lxpgl")

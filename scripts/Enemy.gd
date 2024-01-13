@@ -1,8 +1,9 @@
 extends CharacterBody2D
+class_name Enemy
 
 @export var SPEED: int = 100
 
-@onready var player: CharacterBody2D = %Player
+@onready var player: Player = %Player
 
 func _physics_process(_delta: float) -> void:
 	var direction := global_position.direction_to(player.global_position)

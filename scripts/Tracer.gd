@@ -10,4 +10,3 @@ func _physics_process(_delta: float) -> void:
 		curve.remove_point(0)
 		
 	points = curve.get_baked_points()
-
