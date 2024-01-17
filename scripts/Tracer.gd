@@ -1,4 +1,5 @@
 extends Line2D
+class_name tracer
 
 @export var MAX_POINTS := 20
 @onready var curve := Curve2D.new()

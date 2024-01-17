@@ -48,5 +48,5 @@ func _on_bullet_hit(body:Node2D) -> void:
 	if body is Enemy:
 		var enemy: Enemy = body
 		enemy.hurt(damage)
-		enemy.apply_force(direction * speed)
+		enemy.apply_force(direction * speed / 2)
 		speed_up()

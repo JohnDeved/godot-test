@@ -8,6 +8,8 @@ class_name Player
 
 @onready var camera: Camera2D = $PlayerCamera
 
+var force: Vector2 = Vector2.ZERO
+
 # The _physics_process function is called every physics frame
 func _physics_process(delta: float) -> void:
 	# Calculate the direction based on user input and joystick input
@@ -29,8 +31,11 @@ func _physics_process(delta: float) -> void:
 		velocity -= velocity * FRICTION * delta
 
 	# Calculate the zoom level based on the speed
-	camera.zoom = get_zoom_level()
+	
+	velocity += force
+	force -= force * delta * 20
 
+	# camera.zoom = get_zoom_level() # should not be affected by force
 	# Move the character
 	move_and_collide(velocity * delta)
 
@@ -55,6 +60,10 @@ func get_direction() -> Vector2:
 
 # Function to calculate the zoom level based on the speeds
 func get_zoom_level() -> Vector2:
-	var _speed := velocity.length()
+	var _speed := (velocity - force).length()
 	var zoom_level := 1 - SPEED_ZOOM_FACTOR + SPEED_ZOOM_FACTOR * (1 - _speed / (SPEED + 50))
 	return Vector2(zoom_level, zoom_level)
+
+
+func apply_force(_force: Vector2) -> void:
+	force += _force

@@ -1,11 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://hbnuwhib2cx2"]
+[gd_scene load_steps=8 format=3 uid="uid://hbnuwhib2cx2"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_dnahp"]
 [ext_resource type="Script" path="res://scripts/Spawner.gd" id="1_oatew"]
 [ext_resource type="Texture2D" uid="uid://c3x1mt8d5taxm" path="res://sprites/cat.svg" id="2_kfsmt"]
 [ext_resource type="Script" path="res://scripts/Gun.gd" id="3_rsrdw"]
 [ext_resource type="Texture2D" uid="uid://ct4kjbmqeybk4" path="res://sprites/gun.svg" id="4_7sx6n"]
-[ext_resource type="PackedScene" uid="uid://1liga5skcioc" path="res://Enemy.tscn" id="5_ttrsv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e4tm0"]
 radius = 24.0208
@@ -22,6 +21,7 @@ position = Vector2(599, 106)
 script = ExtResource("1_oatew")
 
 [node name="Timer" type="Timer" parent="Spawner"]
+wait_time = 0.5
 autostart = true
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
@@ -64,10 +64,13 @@ texture = ExtResource("4_7sx6n")
 position = Vector2(257.74, -83.5917)
 
 [node name="Line2D" type="Line2D" parent="Player/Gun/GunSprite/Muzzle"]
-points = PackedVector2Array(97.5234, 0, -6.96582, 0)
+points = PackedVector2Array(97.5234, 0, 41.8953, 0, -6.96582, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Gun"]
 
-[node name="Enemy" parent="." instance=ExtResource("5_ttrsv")]
+[node name="Timer" type="Timer" parent="Player/Gun"]
+wait_time = 0.1
+one_shot = true
 
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="Player/Gun/Timer" to="Player/Gun" method="_on_timer_timeout"]
