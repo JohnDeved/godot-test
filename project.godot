@@ -26,12 +26,6 @@ gdscript/warnings/unsafe_method_access=1
 gdscript/warnings/unsafe_cast=1
 gdscript/warnings/unsafe_call_argument=1
 
-[display]
-
-window/size/viewport_width=1980
-window/size/viewport_height=1080
-window/stretch/mode="viewport"
-
 [input]
 
 action_dash={
@@ -86,6 +80,11 @@ action_shoot={
 2d_render/layer_3="Players"
 2d_render/layer_4="PickUps"
 2d_render/layer_5="Bullets"
+2d_physics/layer_1="World"
+2d_physics/layer_2="Enemies"
+2d_physics/layer_3="Players"
+2d_physics/layer_4="PickUps"
+2d_physics/layer_5="Bullets"
 
 [rendering]
 

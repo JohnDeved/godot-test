@@ -10,6 +10,7 @@ class_name Player
 
 var force: Vector2 = Vector2.ZERO
 
+
 # The _physics_process function is called every physics frame
 func _physics_process(delta: float) -> void:
 	# Calculate the direction based on user input and joystick input
@@ -31,7 +32,7 @@ func _physics_process(delta: float) -> void:
 		velocity -= velocity * FRICTION * delta
 
 	# Calculate the zoom level based on the speed
-	
+
 	velocity += force
 	force -= force * delta * 20
 
@@ -67,3 +68,17 @@ func get_zoom_level() -> Vector2:
 
 func apply_force(_force: Vector2) -> void:
 	force += _force
+
+
+func _on_pickup_range_body_entered(body: Node2D) -> void:
+	if body is XPDrop:
+		var xp_drop: XPDrop = body
+		xp_drop.pickup()
+
+
+func gain_xp(_amount: int) -> void:
+	var sound: AudioStreamPlayer2D = $XPSound.duplicate()
+	add_child(sound)
+	sound.play()
+	# free sound after it's done playing
+	sound.connect("finished", func() -> void: sound.queue_free())

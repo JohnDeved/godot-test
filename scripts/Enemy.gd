@@ -1,6 +1,8 @@
 extends Entity
 class_name Enemy
 
+@onready var XPDropScn := preload("res://XPDrop.tscn")
+
 var p_check := preload("helper/PlayerCheck.gd").new(self)
 
 @export var SPEED: int = 100
@@ -22,12 +24,19 @@ func apply_force(_force: Vector2) -> void:
 	print("applying force")
 	force += _force
 
+func on_death() -> void:
+	death_anim.play("death")
+	var drop: XPDrop = XPDropScn.instantiate()
+	drop.position = global_position
+	get_parent().add_child(drop)
+	print("spawning xp drop ", drop, " at ", drop.position)
+
 func hurt(_damage: int) -> void:
 	health -= _damage
 	print(self.name, " has ", health, " health left")
 	if health <= 0:
 		if self is Enemy:
-			death_anim.play("death")
+			on_death()
 
 	hit_anim.play("hit_flash")
 
