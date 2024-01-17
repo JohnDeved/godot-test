@@ -27,11 +27,14 @@ func hurt(_damage: int) -> void:
 	print(self.name, " has ", health, " health left")
 	if health <= 0:
 		if self is Enemy:
-			print("play death anim")
 			death_anim.play("death")
 
 	hit_anim.play("hit_flash")
 
-func _on_death_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "death":
-		queue_free()
+# func _on_death_animation_finished(anim_name: StringName) -> void:
+# 	if anim_name == "death":
+# 		queue_free()
+
+func _on_death_particles_finished() -> void:
+	print("queueing free")
+	queue_free()

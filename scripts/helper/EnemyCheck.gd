@@ -9,6 +9,8 @@ func get_closest_enemy() -> Enemy:
 	var closest_distance := INF
 
 	for enemy: CharacterBody2D in this.get_tree().get_nodes_in_group("enemies"):
+		if enemy.is_dead():
+			continue
 		var distance := this.global_position.distance_to(enemy.global_position)
 		if distance < closest_distance:
 			closest_distance = distance
