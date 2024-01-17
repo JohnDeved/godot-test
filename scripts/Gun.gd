@@ -11,7 +11,7 @@ var can_shoot := true
 @onready var gun_sprite: Sprite2D = $GunSprite
 @onready var gun_muzzle: Marker2D = $GunSprite/Muzzle
 
-func _physics_process(_delta: float) -> void:
+func _process(_delta: float) -> void:
 	var closest_enemy := e_check.get_closest_enemy()
 	if closest_enemy != null:
 		rotate_towards_enemy(closest_enemy)
