@@ -9,7 +9,7 @@ var p_check := preload("helper/PlayerCheck.gd").new(self)
 @export var speed := 1200
 @export var damage := 10
 @export var origin := Vector2()
-@export var steering_force := .5  # The force with which the bullet steers towards the enemy
+@export var steering_force := 2.5  # The force with which the bullet steers towards the enemy
 @export var min_speed := 100
 
 @onready var tracer: Line2D = $Tracer
