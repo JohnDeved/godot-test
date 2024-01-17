@@ -1,9 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://1liga5skcioc"]
+[gd_scene load_steps=19 format=3 uid="uid://1liga5skcioc"]
 
 [ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_fy8ln"]
 [ext_resource type="Shader" uid="uid://dyct02wt0ewui" path="res://shaders/HitFlash.tres" id="2_a3dqb"]
 [ext_resource type="Texture2D" uid="uid://v4na7afresf0" path="res://sprites/crab.svg" id="3_smdyy"]
 [ext_resource type="AudioStream" uid="uid://imesfp4qcs17" path="res://audio/hit.mp3" id="4_iwmot"]
+[ext_resource type="AudioStream" uid="uid://dkorjs6284kfg" path="res://audio/poof.mp3" id="4_v4wbk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a00g5"]
 resource_local_to_scene = true
@@ -97,6 +98,12 @@ _data = {
 "hit_flash": SubResource("Animation_dx4xy")
 }
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_156l2"]
+random_pitch = 1.5
+streams_count = 1
+stream_0/stream = ExtResource("4_v4wbk")
+stream_0/weight = 1.0
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_weetl"]
 random_pitch = 2.0
 streams_count = 1
@@ -170,18 +177,6 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../HitSound:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_kfhtx"]
 resource_name = "death"
@@ -232,18 +227,6 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("../HitSound:playing")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ogtpu"]
 _data = {
@@ -270,6 +253,10 @@ shape = SubResource("CircleShape2D_i8nou")
 libraries = {
 "": SubResource("AnimationLibrary_s7jmi")
 }
+
+[node name="PoofSound" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_156l2")
+volume_db = -20.0
 
 [node name="HitSound" type="AudioStreamPlayer2D" parent="."]
 scale = Vector2(0.148437, 0.148437)
