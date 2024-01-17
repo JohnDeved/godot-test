@@ -1,27 +1,40 @@
-[gd_scene load_steps=5 format=3 uid="uid://61fsl5cmpvu5"]
+[gd_scene load_steps=6 format=3 uid="uid://61fsl5cmpvu5"]
 
 [ext_resource type="Script" path="res://scripts/Bullet.gd" id="1_ap1dt"]
 [ext_resource type="Script" path="res://scripts/Tracer.gd" id="1_ftopd"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_lxpgl"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_o5lmr"]
 
 [sub_resource type="Curve" id="Curve_d3jiv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Gradient" id="Gradient_q5vtd"]
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
 [node name="Bullet" type="Node2D"]
 top_level = true
 script = ExtResource("1_ap1dt")
+is_fired = null
+direction = null
+speed = null
+damage = null
+origin = null
+steering_force = null
+min_speed = null
 
-[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
-shape = SubResource("CircleShape2D_lxpgl")
-target_position = Vector2(0, 0)
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_o5lmr")
 
 [node name="Tracer" type="Line2D" parent="."]
 top_level = true
-position = Vector2(65, 14)
-points = PackedVector2Array(121, 51)
+points = PackedVector2Array(0, 0)
 width_curve = SubResource("Curve_d3jiv")
+gradient = SubResource("Gradient_q5vtd")
 end_cap_mode = 2
 antialiased = true
 script = ExtResource("1_ftopd")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_bullet_hit"]

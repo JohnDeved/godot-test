@@ -1,21 +1,28 @@
-[gd_scene load_steps=9 format=3 uid="uid://mkvcsslcsnvh"]
+[gd_scene load_steps=9 format=3 uid="uid://hbnuwhib2cx2"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_dnahp"]
+[ext_resource type="Script" path="res://scripts/Spawner.gd" id="1_oatew"]
 [ext_resource type="Texture2D" uid="uid://c3x1mt8d5taxm" path="res://sprites/cat.svg" id="2_kfsmt"]
 [ext_resource type="Script" path="res://scripts/Gun.gd" id="3_rsrdw"]
 [ext_resource type="Texture2D" uid="uid://ct4kjbmqeybk4" path="res://sprites/gun.svg" id="4_7sx6n"]
-[ext_resource type="Script" path="res://scripts/Enemy.gd" id="7_ap3bq"]
-[ext_resource type="Texture2D" uid="uid://v4na7afresf0" path="res://sprites/crab.svg" id="8_qgbif"]
+[ext_resource type="PackedScene" uid="uid://1liga5skcioc" path="res://Enemy.tscn" id="5_ttrsv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e4tm0"]
+radius = 24.0208
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_23opd"]
 radius = 19.0
 height = 57.8947
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_i8nou"]
-radius = 23.0
-
 [node name="World" type="Node2D"]
 y_sort_enabled = true
+
+[node name="Spawner" type="Node2D" parent="."]
+position = Vector2(599, 106)
+script = ExtResource("1_oatew")
+
+[node name="Timer" type="Timer" parent="Spawner"]
+autostart = true
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
 unique_name_in_owner = true
@@ -31,10 +38,19 @@ texture = ExtResource("2_kfsmt")
 process_callback = 0
 position_smoothing_enabled = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+[node name="HurtBox" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/HurtBox"]
+position = Vector2(2, 16)
+shape = SubResource("CircleShape2D_e4tm0")
+debug_color = Color(0, 0.627451, 0.501961, 0.419608)
+
+[node name="HitBox" type="CollisionShape2D" parent="Player"]
+visibility_layer = 5
 position = Vector2(3, 17)
 scale = Vector2(1, 0.76)
 shape = SubResource("CapsuleShape2D_23opd")
+disabled = true
 
 [node name="Gun" type="Node2D" parent="Player"]
 script = ExtResource("3_rsrdw")
@@ -50,14 +66,8 @@ position = Vector2(257.74, -83.5917)
 [node name="Line2D" type="Line2D" parent="Player/Gun/GunSprite/Muzzle"]
 points = PackedVector2Array(97.5234, 0, -6.96582, 0)
 
-[node name="Enemy" type="CharacterBody2D" parent="." groups=["enemies"]]
-position = Vector2(257, 142)
-script = ExtResource("7_ap3bq")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Gun"]
 
-[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
-scale = Vector2(0.148437, 0.148437)
-texture = ExtResource("8_qgbif")
+[node name="Enemy" parent="." instance=ExtResource("5_ttrsv")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
-position = Vector2(0, 6)
-shape = SubResource("CircleShape2D_i8nou")
+[connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]

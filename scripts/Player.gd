@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Entity
 class_name Player
 
 @export var SPEED := 600
@@ -55,6 +55,6 @@ func get_direction() -> Vector2:
 
 # Function to calculate the zoom level based on the speeds
 func get_zoom_level() -> Vector2:
-	var speed := velocity.length()
-	var zoom_level := 1 - SPEED_ZOOM_FACTOR + SPEED_ZOOM_FACTOR * (1 - speed / (SPEED + 50))
+	var _speed := velocity.length()
+	var zoom_level := 1 - SPEED_ZOOM_FACTOR + SPEED_ZOOM_FACTOR * (1 - _speed / (SPEED + 50))
 	return Vector2(zoom_level, zoom_level)

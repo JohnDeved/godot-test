@@ -1,21 +1,24 @@
-class_name Bullet
 extends Node2D
+class_name Bullet
+
+var e_check := preload("helper/EnemyCheck.gd").new(self)
+var p_check := preload("helper/PlayerCheck.gd").new(self)
 
 @export var is_fired := false
 @export var direction := Vector2()
 @export var speed := 1200
-@export var damage := 1
+@export var damage := 10
 @export var origin := Vector2()
 @export var steering_force := .5  # The force with which the bullet steers towards the enemy
 @export var min_speed := 100
 
 @onready var tracer: Line2D = $Tracer
-var enemy_check := preload("helper/EnemyCheck.gd").new(self)
+@onready var player: Player = p_check.get_local_player()
 
 func _physics_process(delta: float) -> void:
 	if is_fired:
 		position += direction * speed * delta
-		var closest_enemy := enemy_check.get_closest_enemy()
+		var closest_enemy := e_check.get_closest_enemy()
 		if closest_enemy:
 			var desired_direction := (closest_enemy.global_position - global_position).normalized()
 			direction = direction.lerp(desired_direction, steering_force * delta)
@@ -37,3 +40,13 @@ func fire(_pos: Vector2, _dir: float) -> void:
 func should_despawn() -> bool:
 	# distance from origin
 	return position.distance_to(origin) > 10000 or (direction * speed).length() < min_speed
+
+func speed_up(val: int = 100) -> void:
+	speed += val
+
+func _on_bullet_hit(body:Node2D) -> void:
+	if body is Enemy:
+		var enemy: Enemy = body
+		enemy.hurt(damage)
+		enemy.apply_force(direction * speed)
+		speed_up()

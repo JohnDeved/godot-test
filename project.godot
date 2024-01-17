@@ -69,6 +69,14 @@ action_shoot={
 ]
 }
 
+[layer_names]
+
+2d_render/layer_1="World"
+2d_render/layer_2="Enemies"
+2d_render/layer_3="Players"
+2d_render/layer_4="PickUps"
+2d_render/layer_5="Bullets"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

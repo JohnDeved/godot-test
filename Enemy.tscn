@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=3 uid="uid://1liga5skcioc"]
+
+[ext_resource type="Script" path="res://scripts/Enemy.gd" id="1_fy8ln"]
+[ext_resource type="Shader" uid="uid://dyct02wt0ewui" path="res://shaders/HitFlash.tres" id="2_a3dqb"]
+[ext_resource type="Texture2D" uid="uid://v4na7afresf0" path="res://sprites/crab.svg" id="3_smdyy"]
+[ext_resource type="AudioStream" uid="uid://imesfp4qcs17" path="res://audio/hit.mp3" id="4_iwmot"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a00g5"]
+resource_local_to_scene = true
+shader = ExtResource("2_a3dqb")
+shader_parameter/BooleanParameter = false
+shader_parameter/ColorParameter = Color(1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i8nou"]
+radius = 23.0
+
+[sub_resource type="Animation" id="Animation_5fgcm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/BooleanParameter")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, false]
+}
+
+[sub_resource type="Animation" id="Animation_dx4xy"]
+resource_name = "hit_flash"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/BooleanParameter")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s7jmi"]
+_data = {
+"RESET": SubResource("Animation_5fgcm"),
+"hit_flash": SubResource("Animation_dx4xy")
+}
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_weetl"]
+random_pitch = 3.05
+streams_count = 1
+stream_0/stream = ExtResource("4_iwmot")
+stream_0/weight = 1.0
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
+position = Vector2(257, 142)
+script = ExtResource("1_fy8ln")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_a00g5")
+scale = Vector2(0.148437, 0.148437)
+texture = ExtResource("3_smdyy")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+visibility_layer = 3
+position = Vector2(0, 6)
+shape = SubResource("CircleShape2D_i8nou")
+
+[node name="HitAnim" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s7jmi")
+}
+
+[node name="HitSound" type="AudioStreamPlayer2D" parent="."]
+scale = Vector2(0.148437, 0.148437)
+stream = SubResource("AudioStreamRandomizer_weetl")
