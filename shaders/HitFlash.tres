@@ -60,7 +60,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-474.525, -34.4684)
 mode = 1
 flags/light_only = false
 nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_e36x6")

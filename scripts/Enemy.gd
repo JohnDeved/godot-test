@@ -7,6 +7,7 @@ var p_check := preload("helper/PlayerCheck.gd").new(self)
 
 @onready var player: Player = p_check.get_local_player()
 @onready var hit_anim: AnimationPlayer = $HitAnim
+@onready var death_anim: AnimationPlayer = $DeathAnim
 
 var force: Vector2 = Vector2.ZERO
 
@@ -26,6 +27,11 @@ func hurt(_damage: int) -> void:
 	print(self.name, " has ", health, " health left")
 	if health <= 0:
 		if self is Enemy:
-			queue_free()
+			print("play death anim")
+			death_anim.play("death")
 
 	hit_anim.play("hit_flash")
+
+func _on_death_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "death":
+		queue_free()

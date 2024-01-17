@@ -29,7 +29,7 @@ func spawn_bullet() -> void:
 	bullet.fire(pos, rot)
 
 	# knockback player using rot
-	var knockback := Vector2(cos(rot), sin(rot)) * 100 * -1
+	var knockback := Vector2(cos(rot), sin(rot)) * 50 * -1
 	player.apply_force(knockback)
 
 	# start timer
@@ -37,6 +37,16 @@ func spawn_bullet() -> void:
 	timer.start()
 
 func rotate_towards_enemy(enemy: CharacterBody2D) -> void:
+	var joy_input := Vector2(
+		Input.get_joy_axis(0, JoyAxis.JOY_AXIS_RIGHT_X),
+		Input.get_joy_axis(0, JoyAxis.JOY_AXIS_RIGHT_Y)
+	)	
+
+	if joy_input.length() > 0.2:
+		self.rotation = joy_input.angle()
+		gun_sprite.flip_v = joy_input.x < 0
+		return
+	
 	var direction := enemy.global_position - global_position
 	self.rotation = direction.angle()
 	gun_sprite.flip_v = direction.x < 0
