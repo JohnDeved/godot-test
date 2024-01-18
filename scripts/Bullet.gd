@@ -2,7 +2,6 @@ extends Node2D
 class_name Bullet
 
 var e := preload("helper/EnemyHelper.gd").new(self)
-var p := preload("helper/PlayerHelper.gd").new(self)
 
 @export var is_fired := false
 @export var direction := Vector2()

@@ -2,7 +2,6 @@ extends Node2D
 
 @onready var BulletScn := preload("res://Bullet.tscn")
 var e := preload("helper/EnemyHelper.gd").new(self)
-var p := preload("helper/PlayerHelper.gd").new(self)
 
 @onready var player := p.get_local_player()
 @onready var timer: Timer = $Timer

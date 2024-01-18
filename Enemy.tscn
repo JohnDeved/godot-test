@@ -238,10 +238,6 @@ _data = {
 collision_layer = 2
 collision_mask = 22
 script = ExtResource("1_fy8ln")
-SPEED = null
-speed = null
-health = null
-base_damage = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_a00g5")

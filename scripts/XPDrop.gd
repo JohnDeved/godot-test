@@ -6,8 +6,6 @@ class_name XPDrop
 @export var SPEED := 300
 @export var XP := 10
 
-var p := preload("helper/PlayerHelper.gd").new(self)
-
 @onready var sound: AudioStreamPlayer2D = $Sound
 @onready var player := p.get_local_player()
 
