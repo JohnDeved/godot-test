@@ -264,6 +264,7 @@ stream = SubResource("AudioStreamRandomizer_weetl")
 attenuation = 1.8025
 
 [node name="DeathParticles" type="GPUParticles2D" parent="."]
+process_mode = 3
 emitting = false
 amount = 50
 process_material = SubResource("ParticleProcessMaterial_fceux")

@@ -8,7 +8,8 @@ bg_color = Color(1, 1, 1, 0.203922)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a4sm1"]
 bg_color = Color(0.376471, 0.607843, 0.905882, 1)
 
-[node name="CanvasLayer" type="CanvasLayer"]
+[node name="UI" type="CanvasLayer"]
+process_mode = 3
 script = ExtResource("1_hegn6")
 
 [node name="XPBar" type="ProgressBar" parent="."]
