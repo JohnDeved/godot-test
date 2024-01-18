@@ -22,10 +22,10 @@ func get_closest_enemy(radius: float = 350) -> Enemy:
 	for r in result:
 		if r.collider is Enemy:
 			var enemy: Enemy = r.collider
-			if enemy and not enemy.is_dead():
-					var distance := this.global_position.distance_to(enemy.global_position)
-					if distance < closest_distance:
-							closest_distance = distance
-							closest_enemy = enemy
+			if enemy.is_alive():
+				var distance := this.global_position.distance_to(enemy.global_position)
+				if distance < closest_distance:
+					closest_distance = distance
+					closest_enemy = enemy
 	
 	return closest_enemy
