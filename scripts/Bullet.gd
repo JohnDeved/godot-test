@@ -1,8 +1,8 @@
 extends Node2D
 class_name Bullet
 
-var e_check := preload("helper/EnemyCheck.gd").new(self)
-var p_check := preload("helper/PlayerCheck.gd").new(self)
+var e := preload("helper/EnemyHelper.gd").new(self)
+var p := preload("helper/PlayerHelper.gd").new(self)
 
 @export var is_fired := false
 @export var direction := Vector2()
@@ -14,12 +14,12 @@ var p_check := preload("helper/PlayerCheck.gd").new(self)
 @export var min_speed := 100
 
 @onready var tracer: Tracer = $Tracer
-@onready var player: Player = p_check.get_local_player()
+@onready var player: Player = p.get_local_player()
 
 func _physics_process(delta: float) -> void:
 	if is_fired:
 		position += direction * SPEED * delta
-		var closest_enemy := e_check.get_closest_enemy()
+		var closest_enemy := e.get_closest_enemy()
 		if closest_enemy:
 			var desired_direction := (closest_enemy.global_position - position).normalized()
 			direction = direction.lerp(desired_direction, steering_force * delta)

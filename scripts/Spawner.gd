@@ -2,8 +2,8 @@ extends Node2D
 class_name Spawner
 
 @onready var EnemyScn := preload("res://Enemy.tscn")
-var p_check := preload("helper/PlayerCheck.gd").new(self)
-@onready var camera := p_check.get_local_camera()
+var p := preload("helper/PlayerHelper.gd").new(self)
+@onready var camera := p.get_local_camera()
 
 func _on_timer_timeout() -> void:
 	print("Spawning enemy group")

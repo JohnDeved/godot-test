@@ -6,10 +6,10 @@ class_name XPDrop
 @export var SPEED := 300
 @export var XP := 10
 
-var p_check := preload("helper/PlayerCheck.gd").new(self)
+var p := preload("helper/PlayerHelper.gd").new(self)
 
 @onready var sound: AudioStreamPlayer2D = $Sound
-@onready var player := p_check.get_local_player()
+@onready var player := p.get_local_player()
 
 func _physics_process(delta: float) -> void:
 	if collecting:

@@ -3,11 +3,11 @@ class_name Enemy
 
 @onready var XPDropScn := preload("res://XPDrop.tscn")
 
-var p_check := preload("helper/PlayerCheck.gd").new(self)
+var p := preload("helper/PlayerHelper.gd").new(self)
 
 @export var SPEED: int = 100
 
-@onready var player: Player = p_check.get_local_player()
+@onready var player: Player = p.get_local_player()
 @onready var hit_anim: AnimationPlayer = $HitAnim
 @onready var death_anim: AnimationPlayer = $DeathAnim
 

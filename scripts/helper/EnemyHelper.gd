@@ -1,4 +1,4 @@
-class_name EnemyCheck
+class_name EnemyHelper
 
 var this: Node2D
 func _init(_this: Node2D) -> void:

@@ -1,4 +1,4 @@
-class_name PlayerCheck
+class_name PlayerHelper
 
 var this: Node
 func _init(_this: Node) -> void:
