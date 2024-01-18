@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dvi3cjno6yrak"]
 
-[ext_resource type="Script" path="res://scripts/XPBar.gd" id="1_e0g0b"]
+[ext_resource type="Script" path="res://scripts/UI.gd" id="1_hegn6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lsmc3"]
 bg_color = Color(1, 1, 1, 0.203922)
@@ -9,6 +9,7 @@ bg_color = Color(1, 1, 1, 0.203922)
 bg_color = Color(0.376471, 0.607843, 0.905882, 1)
 
 [node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_hegn6")
 
 [node name="XPBar" type="ProgressBar" parent="."]
 anchors_preset = 5
@@ -22,4 +23,3 @@ grow_horizontal = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_lsmc3")
 theme_override_styles/fill = SubResource("StyleBoxFlat_a4sm1")
 show_percentage = false
-script = ExtResource("1_e0g0b")

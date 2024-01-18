@@ -1,6 +1,9 @@
 extends Entity
 class_name Player
 
+signal xp_gained(amount: int, progress: float)
+signal level_up(level: int)
+
 @export var SPEED := 600
 @export var ACCELERATION := 0.1
 @export var FRICTION := 0.2
@@ -94,10 +97,12 @@ func gain_xp(_amount: int) -> void:
 	sound.play()
 	# free sound after it's done playing
 	sound.connect("finished", func() -> void: sound.queue_free())
-
+	xp_gained.emit(_amount, get_level_progress())
+	
 	current_xp += _amount
-	print("percent: ", get_level_progress())
 	if current_xp >= xp_to_next_level:
 		level += 1
 		xp_to_next_level = get_xp_for_level(level)
 		print("Level up! You are now level ", level)
+		level_up.emit(level)
+		
