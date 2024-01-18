@@ -1,30 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://hbnuwhib2cx2"]
+[gd_scene load_steps=4 format=3 uid="uid://hbnuwhib2cx2"]
 
-[ext_resource type="Script" path="res://scripts/Player.gd" id="1_dnahp"]
 [ext_resource type="Script" path="res://scripts/Spawner.gd" id="1_oatew"]
-[ext_resource type="Texture2D" uid="uid://c3x1mt8d5taxm" path="res://sprites/cat.svg" id="2_kfsmt"]
-[ext_resource type="Script" path="res://scripts/Gun.gd" id="3_rsrdw"]
-[ext_resource type="Texture2D" uid="uid://ct4kjbmqeybk4" path="res://sprites/gun.svg" id="4_7sx6n"]
-[ext_resource type="AudioStream" uid="uid://tf6h506331m0" path="res://audio/xp.mp3" id="6_52pji"]
+[ext_resource type="PackedScene" uid="uid://cwqfc84gk0hsr" path="res://Player.tscn" id="2_wbp4h"]
 
 [sub_resource type="Environment" id="Environment_2sb1u"]
 background_mode = 3
 volumetric_fog_density = 0.4991
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_e4tm0"]
-radius = 24.0208
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_23opd"]
-radius = 19.0
-height = 57.8947
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ckwyt"]
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_864go"]
-random_pitch = 2.0
-streams_count = 1
-stream_0/stream = ExtResource("6_52pji")
-stream_0/weight = 1.0
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -36,74 +17,8 @@ environment = SubResource("Environment_2sb1u")
 script = ExtResource("1_oatew")
 
 [node name="Timer" type="Timer" parent="Spawner"]
-wait_time = 0.25
 autostart = true
 
-[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
-unique_name_in_owner = true
-collision_layer = 4
-collision_mask = 10
-script = ExtResource("1_dnahp")
-
-[node name="PlayerSprite" type="Sprite2D" parent="Player"]
-position = Vector2(0, -1)
-scale = Vector2(0.160156, 0.160156)
-texture = ExtResource("2_kfsmt")
-
-[node name="PlayerCamera" type="Camera2D" parent="Player"]
-process_callback = 0
-position_smoothing_enabled = true
-
-[node name="HurtBox" type="Area2D" parent="Player"]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/HurtBox"]
-position = Vector2(2, 16)
-shape = SubResource("CircleShape2D_e4tm0")
-debug_color = Color(0, 0.627451, 0.501961, 0.419608)
-
-[node name="HitBox" type="CollisionShape2D" parent="Player"]
-visibility_layer = 5
-position = Vector2(3, 17)
-scale = Vector2(1, 0.76)
-shape = SubResource("CapsuleShape2D_23opd")
-disabled = true
-
-[node name="Gun" type="Node2D" parent="Player"]
-script = ExtResource("3_rsrdw")
-
-[node name="GunSprite" type="Sprite2D" parent="Player/Gun"]
-position = Vector2(40, 0)
-scale = Vector2(0.143555, 0.143555)
-texture = ExtResource("4_7sx6n")
-
-[node name="Muzzle" type="Marker2D" parent="Player/Gun/GunSprite"]
-position = Vector2(257.74, -83.5917)
-
-[node name="Line2D" type="Line2D" parent="Player/Gun/GunSprite/Muzzle"]
-points = PackedVector2Array(97.5234, 0, 41.8953, 0, -6.96582, 0)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Player/Gun"]
-
-[node name="Timer" type="Timer" parent="Player/Gun"]
-wait_time = 0.1
-one_shot = true
-
-[node name="PickupRange" type="Area2D" parent="Player"]
-collision_layer = 0
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PickupRange"]
-scale = Vector2(15, 15)
-shape = SubResource("CircleShape2D_ckwyt")
-debug_color = Color(0.341176, 0.611765, 0.309804, 0)
-
-[node name="XPSound" type="AudioStreamPlayer2D" parent="Player"]
-stream = SubResource("AudioStreamRandomizer_864go")
-volume_db = -15.0
-pitch_scale = 0.3
+[node name="Player" parent="." instance=ExtResource("2_wbp4h")]
 
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]
-[connection signal="timeout" from="Player/Gun/Timer" to="Player/Gun" method="_on_timer_timeout"]
-[connection signal="body_entered" from="Player/PickupRange" to="Player" method="_on_pickup_range_body_entered"]

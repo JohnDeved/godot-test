@@ -6,6 +6,10 @@ class_name Player
 @export var FRICTION := 0.2
 @export var SPEED_ZOOM_FACTOR := 0.15
 
+var current_xp := 0
+var xp_to_next_level := 100
+var level := 1
+
 @onready var camera: Camera2D = $PlayerCamera
 
 var force: Vector2 = Vector2.ZERO
@@ -82,3 +86,10 @@ func gain_xp(_amount: int) -> void:
 	sound.play()
 	# free sound after it's done playing
 	sound.connect("finished", func() -> void: sound.queue_free())
+
+	current_xp += _amount
+	print("xp until next level: ", xp_to_next_level - current_xp)
+	if current_xp >= xp_to_next_level:
+		level += 1
+		xp_to_next_level = (level ** 2) * 100
+		print("Level up! You are now level ", level)

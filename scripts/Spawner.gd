@@ -6,17 +6,22 @@ var p_check := preload("helper/PlayerCheck.gd").new(self)
 @onready var camera := p_check.get_local_camera()
 
 func _on_timer_timeout() -> void:
-	print("Spawning enemy")
-	var enemy: Enemy = EnemyScn.instantiate()
+	print("Spawning enemy group")
+	var group_size := randf_range(1, 5)  # Random group size between 3 and 6
 
 	var camera_pos := camera.global_position
-	var camera_size := camera.get_viewport_rect().size
 
 	var angle := randf() * 2 * PI  # Random angle in radians
-	var radius: float = sqrt(pow(camera_size.x, 2) + pow(camera_size.y, 2)) + 50  # Full length of the diagonal of the viewport plus some offset
+	var radius: float = randf_range(1000, 1500)  # Random radius between 100 and 200
 
-	var spawn_pos := Vector2(cos(angle), sin(angle)) * radius  # Convert polar coordinates to Cartesian coordinates
+	var group_center := Vector2(cos(angle), sin(angle)) * radius  # Convert polar coordinates to Cartesian coordinates
 
-	enemy.global_position = camera_pos + spawn_pos
-	add_child(enemy)
+	for i in range(group_size):
+			var enemy: Enemy = EnemyScn.instantiate()
 
+			var offset_angle := randf() * 2 * PI  # Random angle for the offset
+			var offset_radius := randf_range(10, 30)  # Random radius for the offset
+			var offset := Vector2(cos(offset_angle), sin(offset_angle)) * offset_radius  # Convert polar coordinates to Cartesian coordinates
+
+			enemy.global_position = camera_pos + group_center + offset
+			add_child(enemy)

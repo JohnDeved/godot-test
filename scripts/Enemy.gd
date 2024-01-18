@@ -46,4 +46,4 @@ func hurt(_damage: int) -> void:
 
 func _on_death_particles_finished() -> void:
 	print("queueing free")
-	queue_free()
+	call_deferred("queue_free")

@@ -4,6 +4,7 @@ class_name XPDrop
 @export var collecting := false
 @export var ABSORB_RANGE := 10
 @export var SPEED := 300
+@export var XP := 10
 
 var p_check := preload("helper/PlayerCheck.gd").new(self)
 
@@ -18,7 +19,7 @@ func _physics_process(delta: float) -> void:
 
 		if player.global_position.distance_to(position) < ABSORB_RANGE:
 			queue_free()
-			player.gain_xp(1)
+			player.gain_xp(XP)
 			collecting = false
 
 func pickup() -> void:

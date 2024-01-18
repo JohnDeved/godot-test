@@ -6,7 +6,8 @@ var p_check := preload("helper/PlayerCheck.gd").new(self)
 
 @export var is_fired := false
 @export var direction := Vector2()
-@export var SPEED := 1200
+@export var SPEED := 800
+@export var DRAG := 10
 @export var DAMAGE := 10
 @export var origin := Vector2()
 @export var steering_force := 2.5  # The force with which the bullet steers towards the enemy
@@ -26,6 +27,9 @@ func _physics_process(delta: float) -> void:
 		var current_speed := (direction * SPEED).length()
 		tracer.modulate = Color(1, 1, 1, 1 - min_speed / current_speed)
 
+		# Apply drag
+		SPEED = max(SPEED - DRAG, min_speed)
+
 		if should_despawn():
 			queue_free()
 
@@ -41,7 +45,7 @@ func should_despawn() -> bool:
 	# distance from origin
 	return global_position.distance_to(origin) > 10000 or (direction * SPEED).length() < min_speed
 
-func speed_up(val: int = 100) -> void:
+func speed_up(val: int = 10) -> void:
 	SPEED += val
 
 func _on_bullet_hit(body:Node2D) -> void:
