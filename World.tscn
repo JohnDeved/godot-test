@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://hbnuwhib2cx2"]
+[gd_scene load_steps=5 format=3 uid="uid://hbnuwhib2cx2"]
 
 [ext_resource type="Script" path="res://scripts/Spawner.gd" id="1_oatew"]
 [ext_resource type="PackedScene" uid="uid://cwqfc84gk0hsr" path="res://Player.tscn" id="2_wbp4h"]
+[ext_resource type="PackedScene" uid="uid://dvi3cjno6yrak" path="res://UI.tscn" id="3_jdxxm"]
 
 [sub_resource type="Environment" id="Environment_2sb1u"]
 background_mode = 3
@@ -20,5 +21,7 @@ script = ExtResource("1_oatew")
 autostart = true
 
 [node name="Player" parent="." instance=ExtResource("2_wbp4h")]
+
+[node name="CanvasLayer" parent="." instance=ExtResource("3_jdxxm")]
 
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]

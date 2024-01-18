@@ -6,8 +6,8 @@ class_name Player
 @export var FRICTION := 0.2
 @export var SPEED_ZOOM_FACTOR := 0.15
 
-var current_xp := 0
-var xp_to_next_level := 100
+var current_xp: float = 0
+var xp_to_next_level: float = 100
 var level := 1
 
 @onready var camera: Camera2D = $PlayerCamera
@@ -79,6 +79,14 @@ func _on_pickup_range_body_entered(body: Node2D) -> void:
 		var xp_drop: XPDrop = body
 		xp_drop.pickup()
 
+func get_level_progress() -> float:
+	var previous_level_xp := get_xp_for_level(level - 1)
+	var xp_progress := current_xp - previous_level_xp
+	var total_xp_needed: float = xp_to_next_level - previous_level_xp
+	return clamp(xp_progress / total_xp_needed, 0, 1)
+
+func get_xp_for_level(_level: int) -> float:
+	return (_level ** 2) * 100
 
 func gain_xp(_amount: int) -> void:
 	var sound: AudioStreamPlayer2D = $XPSound.duplicate()
@@ -88,8 +96,8 @@ func gain_xp(_amount: int) -> void:
 	sound.connect("finished", func() -> void: sound.queue_free())
 
 	current_xp += _amount
-	print("xp until next level: ", xp_to_next_level - current_xp)
+	print("percent: ", get_level_progress())
 	if current_xp >= xp_to_next_level:
 		level += 1
-		xp_to_next_level = (level ** 2) * 100
+		xp_to_next_level = get_xp_for_level(level)
 		print("Level up! You are now level ", level)

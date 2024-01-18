@@ -1,7 +1,7 @@
 class_name PlayerCheck
 
-var this: Node2D
-func _init(_this: Node2D) -> void:
+var this: Node
+func _init(_this: Node) -> void:
 	this = _this
 
 func get_local_player() -> Player:
