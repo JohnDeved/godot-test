@@ -21,6 +21,7 @@ buses/default_bus_layout=""
 [autoload]
 
 p="*res://scripts/helper/PlayerGlobal.gd"
+e="*res://scripts/helper/EnemyGlobal.gd"
 
 [debug]
 

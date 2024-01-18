@@ -1,7 +1,6 @@
 extends Node2D
 
 @onready var BulletScn := preload("res://Bullet.tscn")
-var e := preload("helper/EnemyHelper.gd").new(self)
 
 @onready var player := p.get_local_player()
 @onready var timer: Timer = $Timer
@@ -11,7 +10,7 @@ var can_shoot := true
 @onready var gun_muzzle: Marker2D = $GunSprite/Muzzle
 
 func _process(_delta: float) -> void:
-	var closest_enemy := e.get_closest_enemy()
+	var closest_enemy := e.get_closest_enemy(self)
 	if closest_enemy != null:
 		rotate_towards_enemy(closest_enemy)
 	

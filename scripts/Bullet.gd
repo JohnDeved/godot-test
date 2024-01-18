@@ -1,8 +1,6 @@
 extends Node2D
 class_name Bullet
 
-var e := preload("helper/EnemyHelper.gd").new(self)
-
 @export var is_fired := false
 @export var direction := Vector2()
 @export var SPEED := 800
@@ -18,7 +16,7 @@ var e := preload("helper/EnemyHelper.gd").new(self)
 func _physics_process(delta: float) -> void:
 	if is_fired:
 		position += direction * SPEED * delta
-		var closest_enemy := e.get_closest_enemy()
+		var closest_enemy := e.get_closest_enemy(self)
 		if closest_enemy:
 			var desired_direction := (closest_enemy.global_position - position).normalized()
 			direction = direction.lerp(desired_direction, steering_force * delta)
