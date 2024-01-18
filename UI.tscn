@@ -13,6 +13,7 @@ process_mode = 3
 script = ExtResource("1_hegn6")
 
 [node name="XPBar" type="ProgressBar" parent="."]
+unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -24,3 +25,33 @@ grow_horizontal = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_lsmc3")
 theme_override_styles/fill = SubResource("StyleBoxFlat_a4sm1")
 show_percentage = false
+
+[node name="SkillSelection" type="HBoxContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.5
+offset_top = -20.0
+offset_right = 116.5
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="SkillSelection"]
+layout_mode = 2
+text = "Button 1"
+
+[node name="Button2" type="Button" parent="SkillSelection"]
+layout_mode = 2
+text = "Button 1"
+
+[node name="Button3" type="Button" parent="SkillSelection"]
+layout_mode = 2
+text = "Button 1"
+
+[node name="Button4" type="Button" parent="SkillSelection"]
+layout_mode = 2
+text = "Button 1"
