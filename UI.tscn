@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dvi3cjno6yrak"]
 
 [ext_resource type="Script" path="res://scripts/UI.gd" id="1_hegn6"]
-[ext_resource type="PackedScene" uid="uid://bt5c6vso3ru1b" path="res://TemplateCard.tscn" id="2_cxpou"]
+[ext_resource type="PackedScene" uid="uid://bt5c6vso3ru1b" path="res://CardButton.tscn" id="2_cxpou"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lsmc3"]
 bg_color = Color(1, 1, 1, 0.203922)

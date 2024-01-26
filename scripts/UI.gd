@@ -2,7 +2,7 @@ extends CanvasLayer
 
 @onready var xp_bar: ProgressBar = %XPBar
 @onready var skill_selection: HBoxContainer = %SkillSelection
-@onready var CardScn := preload("res://TemplateCard.tscn")
+@onready var CardScn := preload("res://CardButton.tscn")
 
 func _ready() -> void:
 	skill_selection.hide()
@@ -25,7 +25,7 @@ func _on_player_level_up(_level:int) -> void:
 	clear_skill_selection()
 	
 	for i in range(4):
-		var card: TemplateCard = CardScn.instantiate()
+		var card: CardButton = CardScn.instantiate()
 		skill_selection.add_child(card)
 		card.pressed.connect(_on_skill_button_pressed)
 		card.card_text = "Skill " + str(i)

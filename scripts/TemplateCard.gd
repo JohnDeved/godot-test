@@ -1,5 +1,5 @@
 extends Button
-class_name TemplateCard
+class_name CardButton
 
 @onready var text_node: RichTextLabel = find_child("text")
 @onready var img_node: TextureRect = find_child("img")
