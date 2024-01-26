@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt5c6vso3ru1b"]
+
+[ext_resource type="Script" path="res://scripts/TemplateCard.gd" id="1_1nqka"]
+[ext_resource type="Texture2D" uid="uid://ct4kjbmqeybk4" path="res://sprites/gun.svg" id="2_pp3xa"]
+
+[node name="TemplateCard" type="Button"]
+custom_minimum_size = Vector2(100, 150)
+auto_translate = false
+script = ExtResource("1_1nqka")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="pad" type="MarginContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+
+[node name="img" type="TextureRect" parent="VBox/pad"]
+layout_mode = 2
+texture = ExtResource("2_pp3xa")
+expand_mode = 4
+
+[node name="pad2" type="MarginContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="text" type="RichTextLabel" parent="VBox/pad2"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 11
+theme_override_font_sizes/bold_font_size = 11
+theme_override_font_sizes/italics_font_size = 11
+theme_override_font_sizes/bold_italics_font_size = 11
+bbcode_enabled = true
+text = "[b]This[/b] is a test text totaly good stuff"
+fit_content = true
+scroll_active = false

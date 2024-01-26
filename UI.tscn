@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dvi3cjno6yrak"]
+[gd_scene load_steps=5 format=3 uid="uid://dvi3cjno6yrak"]
 
 [ext_resource type="Script" path="res://scripts/UI.gd" id="1_hegn6"]
+[ext_resource type="PackedScene" uid="uid://bt5c6vso3ru1b" path="res://TemplateCard.tscn" id="2_cxpou"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lsmc3"]
 bg_color = Color(1, 1, 1, 0.203922)
@@ -33,25 +34,15 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -116.5
-offset_top = -20.0
-offset_right = 116.5
-offset_bottom = 20.0
+offset_left = -50.0
+offset_top = -75.0
+offset_right = 50.0
+offset_bottom = 75.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 10
 
-[node name="Button" type="Button" parent="SkillSelection"]
+[node name="TemplateCard" parent="SkillSelection" instance=ExtResource("2_cxpou")]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
-text = "Button 1"
-
-[node name="Button2" type="Button" parent="SkillSelection"]
-layout_mode = 2
-text = "Button 1"
-
-[node name="Button3" type="Button" parent="SkillSelection"]
-layout_mode = 2
-text = "Button 1"
-
-[node name="Button4" type="Button" parent="SkillSelection"]
-layout_mode = 2
-text = "Button 1"

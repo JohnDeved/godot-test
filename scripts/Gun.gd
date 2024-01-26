@@ -10,10 +10,20 @@ var can_shoot := true
 @onready var gun_muzzle: Marker2D = $GunSprite/Muzzle
 
 func _process(_delta: float) -> void:
-	var closest_enemy := e.get_closest_enemy(self)
-	if closest_enemy != null:
-		rotate_towards_enemy(closest_enemy)
-	
+
+	var joy_input := Vector2(
+		Input.get_joy_axis(0, JoyAxis.JOY_AXIS_RIGHT_X),
+		Input.get_joy_axis(0, JoyAxis.JOY_AXIS_RIGHT_Y)
+	)	
+
+	if joy_input.length() > 0.2:
+		self.rotation = joy_input.angle()
+		gun_sprite.flip_v = joy_input.x < 0
+	else:
+		var closest_enemy := e.get_closest_enemy(self)
+		if closest_enemy != null:
+			rotate_towards_enemy(closest_enemy)
+		
 	if Input.is_action_pressed("action_shoot") and can_shoot:
 		spawn_bullet()
 
@@ -34,17 +44,7 @@ func spawn_bullet() -> void:
 	can_shoot = false
 	timer.start()
 
-func rotate_towards_enemy(enemy: CharacterBody2D) -> void:
-	var joy_input := Vector2(
-		Input.get_joy_axis(0, JoyAxis.JOY_AXIS_RIGHT_X),
-		Input.get_joy_axis(0, JoyAxis.JOY_AXIS_RIGHT_Y)
-	)	
-
-	if joy_input.length() > 0.2:
-		self.rotation = joy_input.angle()
-		gun_sprite.flip_v = joy_input.x < 0
-		return
-	
+func rotate_towards_enemy(enemy: CharacterBody2D) -> void:	
 	var direction := enemy.global_position - global_position
 	self.rotation = direction.angle()
 	gun_sprite.flip_v = direction.x < 0
