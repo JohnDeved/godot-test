@@ -1,12 +1,12 @@
 [gd_scene load_steps=3 format=3 uid="uid://bt5c6vso3ru1b"]
 
-[ext_resource type="Script" path="res://scripts/TemplateCard.gd" id="1_1nqka"]
-[ext_resource type="Texture2D" uid="uid://ct4kjbmqeybk4" path="res://sprites/gun.svg" id="2_pp3xa"]
+[ext_resource type="Script" path="res://scripts/TemplateCard.gd" id="1_rwm8s"]
+[ext_resource type="Texture2D" uid="uid://ct4kjbmqeybk4" path="res://sprites/gun.svg" id="2_vtmam"]
 
 [node name="TemplateCard" type="Button"]
 custom_minimum_size = Vector2(100, 150)
 auto_translate = false
-script = ExtResource("1_1nqka")
+script = ExtResource("1_rwm8s")
 
 [node name="VBox" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -25,7 +25,7 @@ theme_override_constants/margin_bottom = 5
 
 [node name="img" type="TextureRect" parent="VBox/pad"]
 layout_mode = 2
-texture = ExtResource("2_pp3xa")
+texture = ExtResource("2_vtmam")
 expand_mode = 4
 
 [node name="pad2" type="MarginContainer" parent="VBox"]

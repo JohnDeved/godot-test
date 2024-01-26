@@ -29,7 +29,7 @@ func on_death() -> void:
 	get_parent().add_child(drop)
 	print("spawning xp drop ", drop, " at ", drop.position)
 
-func hurt(_damage: int) -> void:
+func hurt(_damage: float) -> void:
 	health -= _damage
 	print(self.name, " has ", health, " health left")
 	if health <= 0:

@@ -15,14 +15,6 @@ colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
 [node name="Bullet" type="Node2D"]
 top_level = true
 script = ExtResource("1_ap1dt")
-is_fired = null
-direction = null
-SPEED = null
-DRAG = null
-DAMAGE = null
-origin = null
-steering_force = null
-min_speed = null
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 16

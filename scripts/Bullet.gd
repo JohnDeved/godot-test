@@ -1,14 +1,15 @@
 extends Node2D
 class_name Bullet
 
-@export var is_fired := false
-@export var direction := Vector2()
-@export var SPEED := 800
-@export var DRAG := 10
-@export var DAMAGE := 10
-@export var origin := Vector2()
-@export var steering_force := 2.5  # The force with which the bullet steers towards the enemy
-@export var min_speed := 100
+@export var SPEED := 800 * m.wpn_speed_perc
+@export var DRAG := 10 / m.wpn_drag_perc
+@export var DAMAGE := (10 + m.wpn_damage_base) * m.wpn_damage_perc
+@export var STEERING_FORCE := 2.5 * m.wpn_steering_perc  # The force with which the bullet steers towards the enemy
+
+var is_fired := false
+var direction := Vector2()
+var origin := Vector2()
+var min_speed := 100
 
 @onready var tracer: Tracer = $Tracer
 @onready var player: Player = p.get_local_player()
@@ -19,7 +20,7 @@ func _physics_process(delta: float) -> void:
 		var closest_enemy := e.get_closest_enemy(self)
 		if closest_enemy:
 			var desired_direction := (closest_enemy.global_position - position).normalized()
-			direction = direction.lerp(desired_direction, steering_force * delta)
+			direction = direction.lerp(desired_direction, STEERING_FORCE * delta)
 
 		var current_speed := (direction * SPEED).length()
 		tracer.modulate = Color(1, 1, 1, 1 - min_speed / current_speed)

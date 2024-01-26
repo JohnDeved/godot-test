@@ -20,10 +20,14 @@ script = ExtResource("1_oatew")
 [node name="Timer" type="Timer" parent="Spawner"]
 autostart = true
 
+[node name="SecondTimer" type="Timer" parent="Spawner"]
+autostart = true
+
 [node name="Player" parent="." instance=ExtResource("2_wbp4h")]
 
 [node name="UI" parent="." instance=ExtResource("3_jdxxm")]
 
 [connection signal="timeout" from="Spawner/Timer" to="Spawner" method="_on_timer_timeout"]
+[connection signal="timeout" from="Spawner/SecondTimer" to="Spawner" method="_on_second_timer_timeout"]
 [connection signal="level_up" from="Player" to="UI" method="_on_player_level_up"]
 [connection signal="xp_gained" from="Player" to="UI" method="_on_player_xp_gained"]

@@ -24,10 +24,14 @@ func _on_player_level_up(_level:int) -> void:
 	get_tree().paused = true
 	clear_skill_selection()
 	
-	for i in range(4):
+	var mods := m.get_random_modifiers(4)
+	for mod in mods:
 		var card: CardButton = CardScn.instantiate()
 		skill_selection.add_child(card)
-		card.pressed.connect(_on_skill_button_pressed)
-		card.card_text = "Skill " + str(i)
+		card.pressed.connect(func() -> void: 
+			_on_skill_button_pressed()
+			m.apply_modifier(mod)
+		)
+		card.card_text = mod.description
 
 	skill_selection.show()

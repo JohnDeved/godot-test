@@ -24,3 +24,7 @@ func _on_timer_timeout() -> void:
 
 			enemy.global_position = camera_pos + group_center + offset
 			add_child(enemy)
+
+func _on_second_timer_timeout() -> void:
+	($Timer as Timer).wait_time *= (1 - 0.01) # Decrease wait time by 1%
+	print("Decreasing wait time to: ", ($Timer as Timer).wait_time)
