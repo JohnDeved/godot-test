@@ -16,14 +16,14 @@ func _on_timer_timeout() -> void:
 	var group_center := Vector2(cos(angle), sin(angle)) * radius  # Convert polar coordinates to Cartesian coordinates
 
 	for i in range(group_size):
-			var enemy: Enemy = EnemyScn.instantiate()
+		var enemy: Enemy = EnemyScn.instantiate()
 
-			var offset_angle := randf() * 2 * PI  # Random angle for the offset
-			var offset_radius := randf_range(10, 30)  # Random radius for the offset
-			var offset := Vector2(cos(offset_angle), sin(offset_angle)) * offset_radius  # Convert polar coordinates to Cartesian coordinates
+		var offset_angle := randf() * 2 * PI  # Random angle for the offset
+		var offset_radius := randf_range(10, 30)  # Random radius for the offset
+		var offset := Vector2(cos(offset_angle), sin(offset_angle)) * offset_radius  # Convert polar coordinates to Cartesian coordinates
 
-			enemy.global_position = camera_pos + group_center + offset
-			add_child(enemy)
+		enemy.global_position = camera_pos + group_center + offset
+		add_child(enemy)
 
 func _on_second_timer_timeout() -> void:
 	($Timer as Timer).wait_time *= (1 - 0.01) # Decrease wait time by 1%

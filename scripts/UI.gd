@@ -8,7 +8,7 @@ func _ready() -> void:
 	skill_selection.hide()
 
 func _on_player_xp_gained(_amount:int, progress:float) -> void:
-		xp_bar.value = progress * 100
+	xp_bar.value = progress * 100
 
 func clear_skill_selection() -> void:
 	for child in skill_selection.get_children():

@@ -32,7 +32,6 @@ scale = Vector2(0.160156, 0.160156)
 texture = ExtResource("2_p6kff")
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
-process_callback = 0
 position_smoothing_enabled = true
 
 [node name="HurtBox" type="Area2D" parent="."]
